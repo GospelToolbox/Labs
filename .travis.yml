@@ -1,0 +1,9 @@
+language: ruby
+env: 
+  - RAILS_ENV=test
+before_script:
+  - psql -c 'create database gtbox_labs_test;' -U postgres
+  - "rake db:migrate"
+
+services:
+  - postgresql

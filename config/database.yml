@@ -1,0 +1,29 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  host: <%= ENV.fetch('app_database_host') { 'localhost' } %>
+  port: <%= ENV.fetch('app_database_port') { 5432 } %>
+  user: <%= ENV.fetch('app_database_user') { 'postgres' } %>
+  password: <%= ENV.fetch('app_database_password') { '' } %>
+
+development:
+  <<: *default
+  database: gtbox_labs_dev
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: gtbox_labs_test
+
+production:
+  <<: *default
+  database: <%= ENV.fetch('app_database_name') { 'gtbox_labs_prod' } %>

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Try something new!</h1>
+      <p>
+        The Gospel Toolbox Labs is where you can find all of the new or experimental ideas that are being tested out for prime time.
+      </p>
+      <p>
+        Give them a try in your organization and leave us some feedback. Or if you have an idea to suggest, let us know!
+      </p>
+    </div>
+  </div>
+  <h2>Labs</h2>
+  <div class="row">
+    <% @labs.each do |lab| %>
+    <div class="col-4 mb-4" style="justify-content: space-between;">
+                      
+      <!--Card-->
+      <div class="card" style="height: 100%">
+
+          <!--Card image-->
+          <img class="img-fluid" src="<%= asset_path lab[:image]%>" alt="<%=lab[:name]%>">
+
+          <!--Card content-->
+          <div class="card-body">
+              <!--Title-->
+              <h4 class="card-title"><%=lab[:name]%></h4>
+              <!--Text-->
+              <p class="card-text"><%=lab[:description]%></p>
+
+              <% if lab[:url] %>
+                <a href="#" class="btn btn-primary">Launch</a>
+              <% else %>
+                <div class="alert alert-info">
+                  Coming soon..
+                </div>
+              <% end %>
+              
+          </div>
+
+      </div>
+      <!--/.Card-->
+                    
+    </div>
+
+    <% end %>
+  </div>
+</div>
