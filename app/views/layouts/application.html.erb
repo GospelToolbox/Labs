@@ -27,9 +27,14 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+
+      </ul>
+      <ul class="navbar-nav nav-border-left">
         <li>
-          <a href="https://github.com/GospelToolbox/Labs" title="Source Code" target="_blank">
-            <img src="/img/GitHub-Mark-Light-64px.png" style="height: 30px">
+          <a href="https://github.com/GospelToolbox/Labs" 
+          class="link-github"
+          title="Source Code" target="_blank">
+            <img src="/img/GitHub-Mark-Light-64px.png" />
           </a>
         </li>
       </ul>
@@ -41,30 +46,34 @@
     <div class="alert alert-primary">
       <%= notice %>
     </div>
-    <% end %>
-      <% if alert %>
-        <div class="alert alert-danger">
-          <%= alert %>
-        </div>
-        <% end %>
+  <% end %>
 
-        <%= yield %>
+  <% if alert %>
+    <div class="alert alert-danger">
+      <%= alert %>
+    </div>
+  <% end %>
 
-        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-        <% if ENV.has_key? 'google_analytics_id' %>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['google_analytics_id']%>"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
+  <div class="app-wrapper">
+    <%= yield %>
+  </div>
+      
 
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          gtag('js', new Date());
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <% if ENV.has_key? 'google_analytics_id' %>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['google_analytics_id']%>"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
 
-          gtag('config', '<%=ENV["google_analytics_id"]%>');
-        </script>
-        <% end %>
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', '<%=ENV["google_analytics_id"]%>');
+  </script>
+  <% end %>
 </body>
 
 </html>

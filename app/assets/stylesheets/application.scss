@@ -28,3 +28,21 @@ body {
 .bg-dark {
   background-color: $primary !important;
 }
+
+.app-wrapper {
+  padding-top: 1.4rem;
+}
+
+.nav-border-left {
+  border-left: darken($primary, 20%) 3px solid;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+.link-github {
+  line-height: 30px;
+
+  img {
+    height: 20px;
+  }
+}
