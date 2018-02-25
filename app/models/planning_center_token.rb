@@ -1,0 +1,2 @@
+class PlanningCenterToken < ApplicationRecord
+end

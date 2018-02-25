@@ -6,7 +6,13 @@
   <title>Labs | Gospel Toolbox</title>
   <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_pack_tag 'application' %>
+  <%= stylesheet_link_tag 'application', media: 'all'%>
+
+  <% if content_for? :for_head %>
+    <%= yield :for_head %>
+  <% end %>
 </head>
 
 <body>
@@ -21,15 +27,16 @@
     </a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li>
-          
-        </li>
+      <ul class="navbar-nav nav-border-left mr-auto">
+          <%= react_component("OrganizationDropDown", { 
+            account_url: ENV['gtbox_account_host'],
+            token: current_token 
+          }, {prerender: false}) %>
       </ul>
-      <ul class="navbar-nav ml-auto">
-
+      <ul class="navbar-nav nav-border-left ml-auto">
+        <%= react_component("NavUserProfile", { email: current_user.email, logout_url: auth_signout_url }, {prerender: false}) %>
       </ul>
-      <ul class="navbar-nav nav-border-left">
+      <ul class="navbar-nav nav-border-left hidden-sm-down">
         <li>
           <a href="https://github.com/GospelToolbox/Labs" 
           class="link-github"
@@ -59,7 +66,7 @@
   </div>
       
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'mdb' %>
   <% if ENV.has_key? 'google_analytics_id' %>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['google_analytics_id']%>"></script>

@@ -6,8 +6,8 @@ module OmniAuth
       option :name, :sso
 
       option :client_options, {
-        :site => ENV.fetch('gtbox_account_host', 'http://localhost:3000'),
-        :authorize_path => '/oauth/authorize'
+        site: ENV.fetch('gtbox_account_host', 'http://localhost:3000'),
+        authorize_path: '/oauth/authorize'
       }
 
       def callback_url
@@ -15,13 +15,15 @@ module OmniAuth
       end
 
       uid do
-        raw_info["id"]
+        raw_info["uuid"]
       end
 
       info do
         {
           email: raw_info['email'],
-          organizations: raw_info['organizations'] 
+          uuid: raw_info['uuid'],
+          first_name: raw_info['first_name'],
+          last_name: raw_info['last_name'],
         }
       end
 

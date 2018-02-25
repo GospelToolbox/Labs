@@ -28,13 +28,15 @@
               <!--Text-->
               <p class="card-text"><%=lab[:description]%></p>
 
+              <div class="text-center">
               <% if lab[:url] %>
-                <a href="#" class="btn btn-primary">Launch</a>
+                <a href="<%=lab[:url]%>"  data-turbolinks="false" class="btn btn-primary">Open</a>
               <% else %>
                 <div class="alert alert-info">
                   Coming soon..
                 </div>
               <% end %>
+            </div>
               
           </div>
 

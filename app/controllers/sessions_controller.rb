@@ -1,21 +1,37 @@
+require 'date'
+
+
 class SessionsController < ApplicationController
   protect_from_forgery except: :create
+  skip_before_action :authenticate_user!, except: :destroy
 
   def create
     auth_hash = request.env['omniauth.auth']
-   
-    user = User.find_by(email: auth_hash[:info][:email])
+    user = get_or_create_user auth_hash[:info]
 
-    if !user
-      user = User.new :name => auth_hash[:info][:name], :email => auth_hash[:info][:email]
-      user.save
-    end
+    user.account_token = auth_hash[:credentials][:token]
+    user.account_token_expires = Time.at(auth_hash[:credentials][:expires_at]).to_datetime
+    puts user.to_json
+    user.save
 
-    session[:user_id] = user.id    
-    redirect_to root_url, :notice => "Signed in!"
+    session[:user_id] = user.id
+    redirect_to root_url
   end
 
-  def failure
+  def destroy
+    session.delete(:user_id)
+    redirect_to ENV['gtbox_account_host']
   end
 
+  def failure; end
+
+  private
+
+  def get_or_create_user(info)
+    User.find_by(uuid: info[:uuid]) || User.create(
+      uuid: info[:uuid],
+      name: info[:first_name] + ' ' + info[:last_name],
+      email: info[:email]
+    )
+  end
 end
