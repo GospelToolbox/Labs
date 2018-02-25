@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  #if Rails.env.development?
+  #  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
+  #end
 
+  #post '/graphql', to: 'graphql#execute'
 
   match '/auth/:provider/callback', to: 'sessions#create', via: %i[get post], as: :auth_callback
   match '/auth/failure', to: 'sessions#failure', via: %i[get post]
