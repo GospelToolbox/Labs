@@ -5,8 +5,8 @@ class WelcomeController < ApplicationController
       {
         name: 'Team Schedule',
         description: 'Master schedule across all Planning Center teams',
-        image: 'team_schedule.jpg'
-        # url: apps_teamschedule_url
+        image: 'team_schedule.jpg',
+        url: apps_teamschedule_url
       },
       {
         name: 'Ableton Export',

@@ -14,6 +14,7 @@ gem 'font-awesome-rails'
 gem 'graphql'
 
 gem 'pco_api'
+gem 'json-api-vanilla'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.0'
