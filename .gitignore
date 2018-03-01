@@ -31,6 +31,7 @@ runtests.cmd/public/packs
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+/coverage
 
 *.env
 localhost.crt
