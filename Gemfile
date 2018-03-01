@@ -13,8 +13,8 @@ gem 'omniauth-oauth2'
 gem 'font-awesome-rails'
 gem 'graphql'
 
-gem 'pco_api'
 gem 'json-api-vanilla'
+gem 'pco_api'
 
 # Use postgres as the database for Active Record
 gem 'pg', '~> 1.0'
@@ -30,7 +30,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git', ref: '0e581'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -49,15 +49,15 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
   gem 'coveralls', require: false
   gem 'dotenv-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'rubocop'
+  gem 'web-console', '>= 3.3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
