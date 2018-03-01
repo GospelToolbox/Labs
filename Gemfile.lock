@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/rails/webpacker.git
-  revision: 0e58183d806c63ea76cd5e7f04549265044c129b
-  ref: 0e581
+  revision: 3cd48fc74a6e12216c3644c3cb5f6d4fe46c1ac5
   specs:
     webpacker (3.2.2)
       activesupport (>= 4.2)
@@ -89,15 +88,15 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
-    ffi (1.9.22)
-    ffi (1.9.22-x64-mingw32)
+    ffi (1.9.23)
+    ffi (1.9.23-x64-mingw32)
     font-awesome-rails (4.7.0.3)
       railties (>= 3.2, < 5.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     graphiql-rails (1.4.9)
       rails
-    graphql (1.7.12)
+    graphql (1.7.13)
     hashie (3.5.7)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
@@ -151,7 +150,7 @@ GEM
     rack (2.0.4)
     rack-proxy (0.6.3)
       rack
-    rack-test (0.8.2)
+    rack-test (0.8.3)
       rack (>= 1.0, < 3)
     rails (5.1.5)
       actioncable (= 5.1.5)
