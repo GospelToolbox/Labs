@@ -1,5 +1,6 @@
 <% content_for :for_head do %>
   <%= javascript_pack_tag 'teamschedule' %>
+  <%= stylesheet_link_tag 'apps/teamschedule' %>
 <% end %>
 
 <%= react_component("App", {}, {prerender: false}) %>

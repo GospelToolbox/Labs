@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import graph from 'graphql.js';
 import store from '../../common/store';
-import moment from 'moment';
-var _ = require('lodash/core');
+
+
+import TeamScheduleTable from './TeamScheduleTable';
 
 export default class App extends React.Component {
 
@@ -125,132 +126,26 @@ export default class App extends React.Component {
     }
   }
 
-  renderScheduleRows(schedule) {
-    let rows = [];
-
-    let reversedScheduleDates = schedule.schedule_dates.slice().reverse();
-
-    let currentRow = [];
-
-    let finalizeRow = () => {
-      currentRow.reverse();
-      rows.push(<tr>{currentRow}</tr>);
-      currentRow = [];
-    };
-
-    for (let serviceTypeId of Object.keys(schedule.service_types)) {
-      let serviceTypeName = schedule.service_types[serviceTypeId];
-      let serviceTypeRowSpan = 0;
-
-      let serviceTeams = schedule.service_type_teams[serviceTypeId];
-
-      serviceTeams.forEach((teamId, teamIdx) => {
-        let teamName = schedule.team_names[teamId]
-
-        let teamPositions = schedule.team_positions[teamId];
-        serviceTypeRowSpan += teamPositions.length;
-
-        teamPositions.forEach((position, positionIdx) => {
-          currentRow = [];
-
-          for (let date of reversedScheduleDates) {
-            let people = schedule.records[serviceTypeId][teamId][position][date];
-            currentRow.push((
-              <td>
-                {this.renderPersonCell(people)}
-              </td>
-            ));
-          }
-
-          currentRow.push((
-            <td style={{whiteSpace: 'nowrap', fontWeight: 'bold'}}>{position}</td>
-          ));
-
-          if (positionIdx < teamPositions.length - 1) {
-            finalizeRow();
-          }
-        }); // teamPositions.forEach...
-
-        currentRow.push((
-          <td style={{whiteSpace: 'nowrap', fontWeight: 'bold'}} rowSpan={teamPositions.length}>{teamName}</td>
-        ));
-
-        if (teamIdx < serviceTeams.length - 1) {
-          finalizeRow();
-        }
-
-      }); // serviceTeams.forEach...
-
-      currentRow.push((
-        <td style={{whiteSpace: 'nowrap', fontWeight: 'bold'}} rowSpan={serviceTypeRowSpan}>{serviceTypeName}</td>
-      ));
-
-      finalizeRow();
-    }
-
-    rows.reverse();
-    return rows;
-  }
-
-  renderPersonCell(people) {
-    if (people == null) {
-      return;
-    }
-
-    return people.map(person => (
-      <span className="badge badge-default" style={{whiteSpace: 'nowrap'}}>
-        <span className="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-        {person.name}
-      </span>
-    )
-    );
-  }
-
-  renderTable() {
-    const {
-      schedule
-    } = this.state;
-
-    if (schedule == null) {
+  renderHeader(organization) {
+    if (organization == null) {
       return;
     }
 
     return (
-      <div style={{ overflow: 'auto' }}>
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>Serve Area</th>
-              <th>Team</th>
-              <th>Position</th>
-              {schedule.schedule_dates.map(date => (<th style={{ whiteSpace: 'nowrap' }} key={date}>{moment(date).format('MMM D')}</th>))}
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderScheduleRows(schedule)}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
-
-  renderHeader(organization) {
-    if (organization != null) {
-      return (
-        <h1>
-          {organization.name}
-          <small className="text-muted ml-3">
-            Team Schedule
+      <h1>
+        {organization.name}
+        <small className="text-muted ml-3">
+          Team Schedule
           </small>
-        </h1>
-      )
-    }
+      </h1>
+    );
   }
 
   render() {
     const {
       has_token,
-      organization
+      organization,
+      schedule
     } = this.state;
 
     return (
@@ -260,7 +155,7 @@ export default class App extends React.Component {
         {this.renderPcoAuthButton()}
         {this.renderRefreshButton()}
 
-        {this.renderTable()}
+        <TeamScheduleTable schedule={schedule}></TeamScheduleTable>
       </div>
     );
   }
