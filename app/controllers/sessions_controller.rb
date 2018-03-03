@@ -28,10 +28,11 @@ class SessionsController < ApplicationController
   private
 
   def get_or_create_user(info)
-    User.find_by(uuid: info[:uuid]) || User.create(
-      uuid: info[:uuid],
-      name: info[:first_name] + ' ' + info[:last_name],
-      email: info[:email]
+    user = User.find_by(uuid: info[:uuid]) || User.create(
+      uuid: info[:uuid]
     )
+
+    user.name = "#{info[:first_name]} #{info[:last_name]}"
+    user.email = info[:email]
   end
 end
