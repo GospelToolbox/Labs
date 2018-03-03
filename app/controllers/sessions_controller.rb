@@ -34,5 +34,7 @@ class SessionsController < ApplicationController
 
     user.name = "#{info[:first_name]} #{info[:last_name]}"
     user.email = info[:email]
+
+    user
   end
 end

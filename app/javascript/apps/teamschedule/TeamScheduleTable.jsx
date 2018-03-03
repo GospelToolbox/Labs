@@ -14,7 +14,7 @@ function TeamScheduleTable(props) {
 
   return (
     <div style={{ overflow: 'auto' }}>
-      <table className="table table-hover serve-team-table">
+      <table className="table serve-team-table">
         <thead>
           <tr>
             <th>Serve Area</th>
@@ -47,14 +47,14 @@ function renderScheduleRows(schedule) {
   });
 
   // Merge all of the service type rows together
-  const allRowCells = [].concat.apply([], serviceTypeRowCells);
+  return [].concat.apply([], serviceTypeRowCells);
 
-  return allRowCells.map(cells => <tr>{cells}</tr>);
+  //return allRowCells.map(cells => <tr>{cells}</tr>);
 }
 
 /**
  * Render the service type and all of the teams
- * @param {*} serviceTypeId 
+ * @param {*} context 
  */
 function generateServiceTypeRowCells(context) {
   const {
@@ -84,7 +84,7 @@ function generateServiceTypeRowCells(context) {
       </td>);
       
 
-    serviceTypeRows[0] = [serviceTypeCell, ...serviceTypeRows[0]];
+    serviceTypeRows[0] = <tr className="team-first">{[serviceTypeCell, ...serviceTypeRows[0].props.children]}</tr>;
   }
 
   return serviceTypeRows;
@@ -92,7 +92,7 @@ function generateServiceTypeRowCells(context) {
 
 /**
  * Render the service team and all of the team positions
- * @param {*} teamId 
+ * @param {*} context 
  */
 function generateTeamRowCells(context) {
   const {
@@ -121,7 +121,7 @@ function generateTeamRowCells(context) {
         {teamName}
       </td>);
 
-    teamRows[0] = [serviceTypeCell, ...teamRows[0]];
+    teamRows[0] = <tr className="team-position-first">{[serviceTypeCell, ...teamRows[0].props.children]}</tr>;
   }
 
   return teamRows;
@@ -130,9 +130,7 @@ function generateTeamRowCells(context) {
 /**
  * Render the current team position and all of the
  * people schedule for the given dates
- * @param {*} position 
- * @param {*} reversedScheduleDates
- * @param {*} onEmit 
+ * @param {*} context 
  */
 function generateTeamPositionRowCells(context) {
   const {
@@ -166,7 +164,7 @@ function generateTeamPositionRowCells(context) {
     </td>
   );
 
-  return [nameCell, ...dateCells];
+  return <tr>{[nameCell, ...dateCells]}</tr>;
 }
 
 export default TeamScheduleTable;

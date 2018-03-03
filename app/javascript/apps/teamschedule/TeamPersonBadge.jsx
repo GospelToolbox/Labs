@@ -14,7 +14,6 @@ function TeamPersonBadge(props) {
 }
 
 function getStyleClass(person) {
-  console.log(person);
   switch(person.status) {
     case 'C':
       return 'badge-success';

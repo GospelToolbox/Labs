@@ -11,4 +11,14 @@ table.serve-team-table {
       vertical-align: middle;
     }
   }
+
+  tr {
+    &.team-position-first {
+      border-top: 2px solid gray;
+    }
+
+    &.team-first {
+      border-top: 4px solid gray;
+    }
+  }
 }
