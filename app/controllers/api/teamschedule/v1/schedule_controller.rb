@@ -81,7 +81,7 @@ class Api::Teamschedule::V1::ScheduleController < ApiController
       end
     end
 
-    # TODO: Store schedule
+    # Cache schedule
     org_schedule = Apps::TeamSchedule::Schedule.find_by(organization_id: params[:organization_id])
     org_schedule ||= Apps::TeamSchedule::Schedule.create(organization_id: params[:organization_id])
 
