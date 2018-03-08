@@ -13,4 +13,4 @@ incubator for Gospel Toolbox.
 
 ### Serve Team Schedule
 Dashboard for viewing people scheduled across all serve teams in Planning Center Services.
-![Screenshot of team schedule dashboard](https://preview.ibb.co/fciuA7/Serve_Team_Schedule_preview.png)
+![Screenshot of team schedule dashboard](https://i.imgur.com/ONZLEuw.png)
