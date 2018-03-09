@@ -34,7 +34,7 @@
           }, {prerender: false}) %>
       </ul>
       <ul class="navbar-nav nav-border-left ml-auto">
-        <%= react_component("NavUserProfile", { email: current_user.email, logout_url: auth_signout_url }, {prerender: false}) %>
+        <%= react_component("NavUserProfile", { email: current_user&.email, logout_url: auth_signout_url }, {prerender: false}) %>
       </ul>
       <ul class="navbar-nav nav-border-left hidden-sm-down">
         <li>

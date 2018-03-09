@@ -62,6 +62,10 @@ import store from '../common/store';
       selected,
       organizations
     } = this.state;
+    
+    if(this.props.token == null) {
+      return null;
+    }
 
     return (
       <li className="nav-item dropdown">

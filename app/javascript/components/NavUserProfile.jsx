@@ -6,6 +6,10 @@ const NavUserProfile = (props) => {
     logout_url
   } = props;
   
+  if(email == null) {
+    return null;
+  }
+
   return (
   
   <li className="nav-item dropdown">
