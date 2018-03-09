@@ -16,6 +16,12 @@ class WelcomeController < ApplicationController
         # url: apps_ableton_url
       },
       {
+        name: 'Spotify Playlist Sync',
+        description: 'Generate Spotify Playlist from Planning Center songs and services',
+        image: 'pco_to_spotify.png'
+        # url: apps_ableton_url
+      },
+      {
         name: 'Missional Community Groups',
         description: 'Tools for missional community group clusters',
         image: 'mcg_clusters.png'
