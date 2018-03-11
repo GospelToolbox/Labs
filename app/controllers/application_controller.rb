@@ -20,6 +20,8 @@ class ApplicationController < ActionController::Base
                current_user.account_token_expires.nil? ||
                current_user.account_token_expires <= Time.now
 
-    redirect_to '/auth/sso' if decision
+    session[:redirect_after_auth] = request.original_url
+
+    redirect_to "/auth/sso" if decision
   end
 end
