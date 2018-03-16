@@ -16,19 +16,21 @@
  *= require font-awesome
  */
 
- $primary: #f9a825;
+$app-color: #f9a825;
 
- ;
+$primary: #004289;
+
+$border-radius: 0;
+$border-radius-lg: 0;
+$border-radius-sm: 0;
 
 @import "bootstrap/scss/bootstrap";
-@import "mdbootstrap/css/mdb";
-
 body {
   padding-top: 3.5rem;
 }
 
-.bg-dark {
-  background-color: $primary !important;
+.nav-app {
+  background-color: $app-color !important;
 }
 
 .app-wrapper {
@@ -36,14 +38,13 @@ body {
 }
 
 .nav-border-left {
-  border-left: darken($primary, 10%) 2px solid;
+  border-left: darken($app-color, 10%) 2px solid;
   padding-left: 10px;
   margin-left: 10px;
 }
 
 .link-github {
   line-height: 30px;
-
   img {
     height: 20px;
   }

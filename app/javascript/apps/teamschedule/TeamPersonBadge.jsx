@@ -7,7 +7,7 @@ function TeamPersonBadge(props) {
 
   return (
     <span className={`badge ${getStyleClass(person)}`} style={{ whiteSpace: 'nowrap' }}>
-      {!person.notification_sent && <i class="fa fa-envelope mr-1"></i>}
+      {!person.notification_sent && <i className="fa fa-envelope mr-1"></i>}
       {person.name}
     </span>
   );

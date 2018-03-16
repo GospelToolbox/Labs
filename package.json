@@ -10,7 +10,6 @@
     "graphql.js": "^0.4.20",
     "jquery": "3",
     "lodash": "^4.17.5",
-    "mdbootstrap": "^4.4.4",
     "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "pubsub-js": "^1.6.0",

@@ -13,7 +13,7 @@ function TeamScheduleTable(props) {
   }
 
   return (
-    <div style={{ overflow: 'auto' }}>
+    <div style={{ overflow: 'scroll', height: '100%', width: '100%' }}>
       <table className="table serve-team-table">
         <thead>
           <tr>
@@ -48,8 +48,6 @@ function renderScheduleRows(schedule) {
 
   // Merge all of the service type rows together
   return [].concat.apply([], serviceTypeRowCells);
-
-  //return allRowCells.map(cells => <tr>{cells}</tr>);
 }
 
 /**
@@ -84,7 +82,7 @@ function generateServiceTypeRowCells(context) {
       </td>);
       
 
-    serviceTypeRows[0] = <tr className="team-first">{[serviceTypeCell, ...serviceTypeRows[0].props.children]}</tr>;
+    serviceTypeRows[0] = <tr key={key(serviceTypeId, serviceTeams[0], 'first' )} className="team-first">{[serviceTypeCell, ...serviceTypeRows[0].props.children]}</tr>;
   }
 
   return serviceTypeRows;
@@ -117,11 +115,11 @@ function generateTeamRowCells(context) {
   if(teamRows.length > 0) {
     const teamName = schedule.team_names[teamId]
     const serviceTypeCell = (
-      <td className="team-name" rowSpan={teamRows.length}>
+      <td key={key(serviceTypeId, teamId, 'name')} className="team-name" rowSpan={teamRows.length}>
         {teamName}
       </td>);
 
-    teamRows[0] = <tr className="team-position-first">{[serviceTypeCell, ...teamRows[0].props.children]}</tr>;
+    teamRows[0] = <tr key={key(serviceTypeId,teamId)} className="team-position-first">{[serviceTypeCell, ...teamRows[0].props.children]}</tr>;
   }
 
   return teamRows;
@@ -152,19 +150,23 @@ function generateTeamPositionRowCells(context) {
 
     let people = schedule.records[serviceTypeId][teamId][position][date];
     return (
-      <td>
-        {people && people.map(person => <TeamPersonBadge person={person}></TeamPersonBadge>) }
+      <td key={key(serviceTypeId, teamId, position, date)} className="position-date">
+        {people && people.map(person => <TeamPersonBadge key={person.name} person={person}></TeamPersonBadge>) }
       </td>
     );
   });
 
   const nameCell = (
-    <td className="team-position-name">
+    <td key={key(serviceTypeId, teamId, position, 'name')} className="team-position-name">
       {position}
     </td>
   );
 
-  return <tr>{[nameCell, ...dateCells]}</tr>;
+  return <tr key={[serviceTypeId, teamId, position].join('-')}>{[nameCell, ...dateCells]}</tr>;
 }
 
 export default TeamScheduleTable;
+
+function key(...args) {
+  return args.map(a => a.toString()).join('-');
+}

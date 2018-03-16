@@ -6,9 +6,12 @@ table.serve-team-table {
     &.service-type-name,
     &.team-name,
     &.team-position-name {
-      white-space: nowrap;
       font-weight: bold;
       vertical-align: middle;
+    }
+
+    &.position-date {
+      border-left: solid 1px #ddd;
     }
   }
 

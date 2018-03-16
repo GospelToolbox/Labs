@@ -67,6 +67,15 @@ import store from '../common/store';
       return null;
     }
 
+    const oranizationsSeen = new Set();
+    const uniqueOrganizations = organizations.filter(entry => {
+        if (oranizationsSeen.has(entry.id)) {
+            return false;
+        }
+        oranizationsSeen.add(entry.id);
+        return true;
+    });
+
     return (
       <li className="nav-item dropdown">
         <a
@@ -80,7 +89,7 @@ import store from '../common/store';
         </a>
         <div className="dropdown-menu" aria-labelledby="dropdown01">
         {
-          organizations.map(org => (
+          uniqueOrganizations.map(org => (
           <a
             key={org.id}
             onClick={e => this.selectOrganization(e, org)}

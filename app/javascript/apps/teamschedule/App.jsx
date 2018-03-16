@@ -152,8 +152,10 @@ export default class App extends React.Component {
       <div className="container">
         {this.renderHeader(organization)}
 
+        <div className="mb-4">
         {this.renderPcoAuthButton()}
         {this.renderRefreshButton()}
+        </div>
 
         <TeamScheduleTable schedule={schedule}></TeamScheduleTable>
       </div>

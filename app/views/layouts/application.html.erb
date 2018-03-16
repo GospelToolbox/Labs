@@ -16,71 +16,13 @@
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="<%= url_for root_path%>">
-      <img src="/img/LogoWhiteSm.png" height="30" alt=""> Gospel Toolbox | Labs
-    </a>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav nav-border-left mr-auto">
-          <%= react_component("OrganizationDropDown", { 
-            account_url: ENV['gtbox_account_host'],
-            token: current_token 
-          }, {prerender: false}) %>
-      </ul>
-      <ul class="navbar-nav nav-border-left ml-auto">
-        <%= react_component("NavUserProfile", { email: current_user&.email, logout_url: auth_signout_url }, {prerender: false}) %>
-      </ul>
-      <ul class="navbar-nav nav-border-left hidden-sm-down">
-        <li>
-          <a href="https://github.com/GospelToolbox/Labs" 
-          class="link-github"
-          title="Source Code" target="_blank">
-            <img src="/img/GitHub-Mark-Light-64px.png" />
-          </a>
-        </li>
-      </ul>
-
-    </div>
-  </nav>
-
-  <% if notice %>
-    <div class="alert alert-primary">
-      <%= notice %>
-    </div>
-  <% end %>
-
-  <% if alert %>
-    <div class="alert alert-danger">
-      <%= alert %>
-    </div>
-  <% end %>
+  <%= render 'partials/navbar' %>
+  <%= render 'partials/alerts' %>
 
   <div class="app-wrapper">
     <%= yield %>
   </div>
-      
 
-  <%= javascript_include_tag 'mdb' %>
-  <% if ENV.has_key? 'google_analytics_id' %>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['google_analytics_id']%>"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', '<%=ENV["google_analytics_id"]%>');
-  </script>
-  <% end %>
+  <%= render 'partials/google_analytics' %>
 </body>
-
 </html>
