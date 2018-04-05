@@ -26,7 +26,8 @@
 /node_modules
 
 runServer.cmd
-runtests.cmd/public/packs
+runtests.cmd
+/public/packs
 /public/packs-test
 /node_modules
 yarn-debug.log*

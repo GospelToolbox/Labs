@@ -1,0 +1,10 @@
+.git/
+.gitignore
+
+Dockerfile
+node_modules
+
+public/packs/
+public/packs-test/
+
+*.env
