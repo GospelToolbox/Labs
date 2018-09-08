@@ -1,6 +1,6 @@
 version: '3'
 services:
-  gtbox-labs:
+  web:
     build:
       context: ../
     environment:
@@ -15,8 +15,8 @@ services:
       - db:db
     volumes:
       - ..:/src/gospeltoolbox/labs
-    links:
-      - db:db
 
   db:
     image: postgres
+    volumes:
+      - ../tmp/db:/var/lib/postgresql/data
