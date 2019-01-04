@@ -10,6 +10,18 @@ class WelcomeController < ApplicationController
         url: apps_teamschedule_url
       },
       {
+        name: 'Preaching Calendar',
+        description: 'Plan preaching schedules that can then sync with Planning Center Services',
+        image: 'preaching_calendar.png',
+        #url
+      },
+      {
+        name: 'Planning Center Bot',
+        description: 'Slack bot for routine service planning tasks',
+        image: 'planning_center_bot.png',
+        #url: 
+      },
+      {
         name: 'Ableton Export',
         description: 'Generate Ableton templates from Planning Center plans',
         image: 'pco_to_ableton.png'
