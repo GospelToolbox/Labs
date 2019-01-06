@@ -37,3 +37,5 @@ yarn-debug.log*
 *.env
 localhost.crt
 localhost.key
+
+.DS_Store
