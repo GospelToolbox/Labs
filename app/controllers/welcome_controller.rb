@@ -16,6 +16,12 @@ class WelcomeController < ApplicationController
         #url
       },
       {
+        name: 'Set Planner',
+        description: 'Song repertoire and schedule planning tools',
+        image: 'set_planner.png',
+        #url
+      },
+      {
         name: 'Planning Center Bot',
         description: 'Slack bot for routine service planning tasks',
         image: 'planning_center_bot.png',
