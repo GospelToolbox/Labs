@@ -3,6 +3,7 @@ services:
   web:
     build:
       context: ../
+    command: sleep infinity
     environment:
       app_database_host: db
       RAILS_LOG_TO_STDOUT: 1
