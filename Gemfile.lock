@@ -146,7 +146,7 @@ GEM
     powerpack (0.1.2)
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.0)
+    puma (3.12.2)
     rack (2.0.6)
     rack-proxy (0.6.5)
       rack
@@ -263,7 +263,7 @@ DEPENDENCIES
   omniauth-oauth2
   pco_api
   pg (~> 1.0.0)
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.1.5)
   react-rails
   rubocop
