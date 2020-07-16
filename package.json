@@ -9,7 +9,7 @@
     "coffeescript": "1.12.7",
     "graphql.js": "^0.4.20",
     "jquery": "3",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "moment": "^2.20.1",
     "popper.js": "1",
     "prop-types": "^15.6.0",
