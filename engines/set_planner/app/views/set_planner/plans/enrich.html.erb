@@ -1,0 +1,38 @@
+<h1><%=@plan.title%> (ENRICH) </h1>
+
+<div>
+<%=link_to 'Gather', gather_plan_path(@plan) %> |
+<%=link_to 'Refine', refine_plan_path(@plan) %> |
+<%=link_to 'Enrich', enrich_plan_path(@plan) %> |
+<%=link_to 'Publish', publish_plan_path(@plan) %>
+</div>
+
+spotify:track:0Iahiy5y1VEmuwTFb65tG8
+
+<%=form_for @plan do |form| %>
+
+<h2>Songs</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @plan.pco_plan_songs.each do |plan_song| %>
+<tr>
+            data: {:confirm => 'Are you sure?'}, :method => :delete%></td>
+      <td><%=link_to(plan_song.pco_song.title, song_path(plan_song.pco_song.id))%><br/>
+      <%=plan_song.pco_song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
+      <td>
+      <%= f.fields_for :pco_plan_songs do |g| %>
+          <%= g.text_field :description %>
+      <% end %>
+      </td>
+    </tr>
+            <% end %>
+            
+          </tbody>
+        </table>
+<% end %>

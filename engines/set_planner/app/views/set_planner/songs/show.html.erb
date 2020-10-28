@@ -1,0 +1,15 @@
+<h1><%=@song.title%></h1>
+
+<h2>Attributes</h2>
+<ul>
+  <% @song.pco_tags.each do |tag| %>
+    <li><%=tag.value%></li>
+  <% end %>
+</ul>
+
+<h2>Arrangements</h2>
+<ul>
+  <% @song.pco_arrangements.each do |arr| %>
+    <li><%=link_to(arr.name, song_arrangement_path(@song.id, arr.id))%></li>
+  <% end %>
+</ul>

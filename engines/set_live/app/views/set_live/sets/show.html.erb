@@ -1,0 +1,77 @@
+<h1><%=@plan.pco_service_type.name%></h1>
+
+<h2><%=@plan.date.strftime('%b %e, %Y')%></h2>
+
+<div>
+
+<button class="btn btn-secondary" id="btn_sync">Sync</button>
+<button class="btn btn-danger" id="btn_stop_all">Stop All</button>
+<button class="btn btn-danger" id="btn_stop_click">Stop Click</button>
+<span style="width: 40px"></span>
+<button class="btn btn-info" id="btn_prev">Prev</button>
+<button class="btn btn-info" id="btn_next">Next</button>
+
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Key</th>
+      <th>BPM</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @plan.songs.each do |song| %>
+      <tr>
+        <td><%=song.name%></td>
+        <td>
+          <div><%=song.pco_key&.starting_key%></div>
+          <div id="<%=song.id%>_pad_loading_status">Pad Loading Status</div>
+        
+        </td>
+        <th><%=song.pco_arrangement.bpm%></th>
+        <th>
+          <button class="btn" id="mute_pad_<%=song.id%>">Toggle Pad</button>
+          <button class="btn">Toggle Click</button>
+          <button class="btn btn-success" id="play_btn_<%=song.id%>">Play</button>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+var data = {
+  songs: [
+    <% @plan.songs.each do |song| %>
+    {
+      id: <%=song.id%>,
+      key: '<%=song.pco_key&.starting_key%>',
+      bpm: <%=song.pco_arrangement.bpm || 0 %>
+    },
+    <% end %>
+  ]
+};
+
+$(document).ready(function() {
+  $.ajaxSetup({
+    headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+  });
+
+  $('#btn_sync').click(function() {
+    $.ajax({
+      method: "POST",
+      url: "<%=SetLive::Engine.routes.url_helpers.set_sync_path(params['id'])%>"
+      })
+      .done(function( msg ) {
+        $('#btn_sync').removeAttr("disabled");
+        location.reload();
+      });
+      $('#btn_sync').attr("disabled", true);
+  });
+});
+</script>
+
+<%= javascript_pack_tag 'sets_show' %>

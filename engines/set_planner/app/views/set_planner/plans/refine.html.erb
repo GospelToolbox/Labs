@@ -1,0 +1,45 @@
+<h1><%=@plan.title%> (REFINE) </h1>
+
+<div>
+  <%=link_to 'Gather', gather_plan_path(@plan) %> |
+  <%=link_to 'Refine', refine_plan_path(@plan) %> |
+  <%=link_to 'Enrich', enrich_plan_path(@plan) %> |
+  <%=link_to 'Publish', publish_plan_path(@plan) %>
+</div>
+
+
+<h2>Songs Needed</h2>
+<p><%=@plan.songs_needed%></p>
+
+<h2>Songs</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Last Used</th>
+      <th>Schedule Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @plan.pco_plan_songs.each do |plan_song| %>
+    <tr>
+      <td><%=link_to 'Destroy', plan_plan_song_path(@plan, plan_song),
+            data: {:confirm => 'Are you sure?'}, :method => :delete%></td>
+      <td><%=link_to(plan_song.pco_song.title, song_path(plan_song.pco_song.id))%><br />
+        <%=plan_song.pco_song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
+      <td><%=plan_song.pco_song.last_used_days.to_i%></td>
+      <td><%=number_with_precision(plan_song.pco_song.schedule_score, precision: 2)%></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<pre>
+[
+  <% @plan.pco_plan_songs.each do |plan_song| %> 
+  "<%=plan_song.pco_song.title%>",
+  <% end %>
+]
+</pre>

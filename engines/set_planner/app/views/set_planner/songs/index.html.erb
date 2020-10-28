@@ -1,0 +1,61 @@
+<h1>Set Planner</h1>
+
+<div>
+  <button id="btnSyncSongs" class="btn btn-primary">Sync Songs</button>
+    <button id="btnSyncPlanItems" class="btn btn-primary">Sync Plan Items</button>
+
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Uses</th>
+      <th>Age</th>
+      <th>Last Used</th>
+      <th>Schedule Score</th>
+      <th>Attributes</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @songs.each do |song| %>
+    <tr>
+      <td><%=link_to(song.title, song_path(song.id))%></td>
+      <td><%=song.count.to_i%></td>
+      <td><%=song.since_first_use.to_i%></td>
+      <td><%=song.since_last_use.to_i%></td>
+      <td><%=number_with_precision(song.score, precision: 2)%></td>
+      <td><%=song.song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
+    </tr>
+    <% end %>  
+  </tbody>
+</table>
+
+<script>
+
+$(document).ready(function() {
+  $('#btnSyncSongs').click(function() {
+    $.ajax({
+      method: "GET",
+      url: "<%=PCO::Engine.routes.url_helpers.sync_songs_path(1)%>"
+      })
+      .done(function( msg ) {
+        $('#btnSyncSongs').removeAttr("disabled");
+        location.reload();
+      });
+      $('#btnSyncSongs').attr("disabled", true);
+  });
+
+  $('#btnSyncPlanItems').click(function() {
+    $.ajax({
+      method: "GET",
+      url: "<%=PCO::Engine.routes.url_helpers.sync_plan_items_path(1)%>"
+      })
+      .done(function( msg ) {
+        $('#btnSyncPlanItems').removeAttr("disabled");
+        location.reload();
+      });
+      $('#btnSyncPlanItems').attr("disabled", true);
+  });
+});
+</script>

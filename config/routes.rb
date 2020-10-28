@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   get 'apps/ableton', to: 'apps/ableton#index'
   get 'apps/teamschedule', to: 'apps/teamschedule#index'
+  
+  mount SetLive::Engine, at: "/setlive"
+  mount SetPlanner::Engine, at: "/setplanner"
+  mount PCO::Engine, at: "/pco"
 
   # Routes for connecting an organization to Planning Center
   scope '/pco', as: 'pco' do
@@ -22,6 +26,15 @@ Rails.application.routes.draw do
     end
 
     match '/callback', to: 'planning_center#complete', via: %i[get post]
+  end
+
+  scope '/spotify', as: 'spotify' do
+    scope '/:organization_id' do
+      get '/auth', to: 'spotify#auth'
+      get '/has_token', to: 'spotify#token?'
+    end
+
+    match '/callback', to: 'spotify#complete', via: %i[get post]
   end
 
   # API Routes

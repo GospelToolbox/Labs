@@ -1,0 +1,4 @@
+#!/bin/bash
+
+summon -p keyring.py \
+  docker-compose -p "labs_dev" exec web bash
