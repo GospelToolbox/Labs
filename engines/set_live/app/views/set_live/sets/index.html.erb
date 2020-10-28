@@ -1,0 +1,44 @@
+<h1>Sets</h1>
+
+<div>
+  <button id="btnSyncServices" class="btn btn-primary">Sync Services</button>
+</div>
+
+<% @service_types.each do |service_type| %>
+  <h2><%=service_type.name%></h2>
+
+  <h3>Plans</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% service_type.upcoming_plans.each do |plan| %>
+      <tr>
+        <td><%=link_to(plan.date.strftime('%b %e, %Y'), set_path(plan.id))%></td>
+        <td><b><%=plan.series_title%></b><br/><%=plan.title%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<script>
+
+$(document).ready(function() {
+  $('#btnSyncServices').click(function() {
+    $.ajax({
+      method: "GET",
+      url: "<%=PCO::Engine.routes.url_helpers.sync_plans_path(1)%>"
+      })
+      .done(function( msg ) {
+        $('#btnSyncServices').removeAttr("disabled");
+        location.reload();
+      });
+      $('#btnSyncServices').attr("disabled", true);
+  });
+});
+</script>
