@@ -65,3 +65,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'graphiql-rails', group: :development
+
+gem 'set_planner', path: 'engines/set_planner'
+gem 'pco', path: 'engines/pco'
+gem 'set_live', path: 'engines/set_live'

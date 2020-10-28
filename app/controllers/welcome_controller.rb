@@ -19,7 +19,7 @@ class WelcomeController < ApplicationController
         name: 'Set Planner',
         description: 'Song repertoire and schedule planning tools',
         image: 'set_planner.png',
-        #url
+        url: set_planner_url
       },
       {
         name: 'Planning Center Bot',
@@ -30,8 +30,8 @@ class WelcomeController < ApplicationController
       {
         name: 'Ableton Export',
         description: 'Generate Ableton templates from Planning Center plans',
-        image: 'pco_to_ableton.png'
-        # url: apps_ableton_url
+        image: 'pco_to_ableton.png',
+        url: apps_ableton_url
       },
       {
         name: 'Spotify Playlist Sync',
