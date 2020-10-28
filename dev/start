@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -f ./nginx/localhost.crt ]; then
+  ./generate-certificate
+fi
+
+docker-compose build
+docker-compose pull
+
+summon -p keyring.py \
+  docker-compose -p "labs_dev" up -d
+
+summon -p keyring.py \
+  docker-compose -p "labs_dev" exec web bash

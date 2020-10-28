@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Generate certificates
+
+docker run -it \
+  -v $(pwd)/nginx:/export \
+  --entrypoint bash \
+  nginx -c "\
+  apt-get update -y
+  apt-get install -y openssl
+  openssl req -x509 -out /export/localhost.crt -keyout /export/localhost.key \
+  -newkey rsa:2048 -nodes -sha256 \
+  -subj '/CN=localhost' -extensions EXT -config <( \
+   printf \"[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth\")
+  "
