@@ -1,0 +1,43 @@
+<h1><%=@plan.title%></h1>
+
+<h2>Description</h2>
+<p><%=@plan.description%></p>
+
+<h2>Start Date</h2>
+<p><%=@plan.start_date%></p>
+
+<h2>Number of Weeks</h2>
+<p><%=@plan.number_of_weeks%></p>
+
+<h2>Songs Needed</h2>
+<p><%=@plan.songs_needed%></p>
+
+<div>
+<%=link_to 'Gather', gather_plan_path(@plan) %> |
+<%=link_to 'Refine', refine_plan_path(@plan) %> |
+<%=link_to 'Enrich', enrich_plan_path(@plan) %> |
+<%=link_to 'Publish', publish_plan_path(@plan) %>
+</div>
+
+<h2>Songs</h2>
+<table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Last Used</th>
+      <th>Schedule Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @plan.pco_plan_songs.each do |plan_song| %>
+<tr>
+      <td><%=link_to(plan_song.pco_song.title, song_path(plan_song.pco_song.id))%><br/>
+      <%=plan_song.pco_song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
+      <td><%=plan_song.pco_song.last_used_days.to_i%></td>
+      <td><%=number_with_precision(plan_song.pco_song.schedule_score, precision: 2)%></td>
+    </tr>
+            <% end %>
+            
+          </tbody>
+        </table>
+ 
