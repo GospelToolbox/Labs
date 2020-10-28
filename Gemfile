@@ -17,11 +17,12 @@ gem 'json-api-vanilla'
 gem 'pco_api'
 
 # Use postgres as the database for Active Record
-gem 'pg', '~> 1.0.0'
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.12'
 
 gem 'rails', '~> 5.1.5'
+gem 'jquery-rails'
 
 gem 'react-rails'
 
@@ -30,7 +31,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', git: 'https://github.com/rails/webpacker.git', ref: '0e581'
+gem 'webpacker', '~> 4.x'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
