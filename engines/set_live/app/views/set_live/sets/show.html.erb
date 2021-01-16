@@ -31,10 +31,12 @@
           <div id="<%=song.id%>_pad_loading_status">Pad Loading Status</div>
         
         </td>
-        <th><%=song.pco_arrangement.bpm%></th>
+        <th>
+          <input id="num_bpm_<%=song.id%>" type="number" value="<%=song.pco_arrangement.bpm%>"/>
+        </th>
         <th>
           <button class="btn" id="mute_pad_<%=song.id%>">Toggle Pad</button>
-          <button class="btn">Toggle Click</button>
+          <!--<button class="btn" id="mute_click_<%=song.id%>">Toggle Click</button>-->
           <button class="btn btn-success" id="play_btn_<%=song.id%>">Play</button>
         </th>
       </tr>
@@ -43,6 +45,7 @@
 </table>
 
 <script>
+
 var data = {
   songs: [
     <% @plan.songs.each do |song| %>

@@ -9,6 +9,7 @@ window.addEventListener('load', init, false);
 function init() {
   loadAudioContext();
 
+  setupBpmAdjustments();
   loadClickBuffer();
   loadPadBuffers();
 
@@ -46,6 +47,16 @@ function loadAudioContext() {
   // Fix up for prefixing
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   audioContext = new AudioContext();
+}
+
+function setupBpmAdjustments() {
+  data.songs.forEach(function(song) {
+    let num_bpm = $('#num_bpm_' + song.id)
+    num_bpm.change(function() {
+      song.bpm = num_bpm.val();
+      metronome.tempo = song.bpm;
+    });
+  });
 }
 
 function loadClickBuffer() {  
