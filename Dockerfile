@@ -52,8 +52,8 @@ COPY engines/set_live/lib/set_live/version.rb /src/gospeltoolbox/labs/engines/se
 RUN bundle install
 
 COPY package.json /src/gospeltoolbox/labs/package.json
-COPY package-lock.json /src/gospeltoolbox/labs/package-lock.json
-RUN npm install
+COPY yarn.lock /src/gospeltoolbox/labs/yarn.lock
+RUN yarn install
 
 COPY . /src/gospeltoolbox/labs
 
