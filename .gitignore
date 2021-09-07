@@ -22,7 +22,9 @@
 
 .byebug_history
 /public/packs
+/public/assets
 /public/packs-test
+/public/set-live-packs
 /node_modules
 
 runServer.cmd
