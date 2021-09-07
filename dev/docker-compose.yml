@@ -15,11 +15,12 @@ services:
   web:
     build:
       context: ../
+    image: labs_dev_web
     command: sleep infinity
     environment:
       app_database_host: db
-      gtbox_account_clientId: 465c1aa4226cf2543a4379437c0b33019f89db9b2e7236c0db98377f765407bd
-      gtbox_account_secret: 63258394f01da87b49d0588121fb1c56994e8947e25677696d1ededa19c6a2e1
+      gtbox_account_client_id:
+      gtbox_account_secret:
       gtbox_account_host: https://account.gospeltoolbox.org
       pco_client_id:
       pco_secret:
