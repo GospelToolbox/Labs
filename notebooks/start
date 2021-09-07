@@ -3,7 +3,7 @@
 docker build . -t gtbox/notebook
 
 summon -p keyring.py docker run --rm -it \
-  -p "8888:8888" \
+  -p "8889:8888" \
   -v "$PWD/work:/home/jovyan/work" \
   --env-file @SUMMONENVFILE \
   gtbox/notebook

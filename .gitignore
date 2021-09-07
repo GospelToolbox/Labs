@@ -39,3 +39,5 @@ localhost.crt
 localhost.key
 
 .DS_Store
+notebooks/work/setlist.yml
+*.db
