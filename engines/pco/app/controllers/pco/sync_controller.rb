@@ -44,7 +44,7 @@ module PCO
     end
 
     def sync_service_types
-      api.service_types.each do |service_type|
+      service_types = api.service_types.each do |service_type|
         synchronizer.save_service_type(service_type)
       end
 
