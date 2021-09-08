@@ -60,7 +60,7 @@ function setupBpmAdjustments() {
 }
 
 function loadClickBuffer() {  
-  loadBuffer('/audio/Metronome.wav', function (buffer) {
+  loadBuffer('https://gtbox-setlive.s3.amazonaws.com/Metronome.wav', function (buffer) {
     metronome = new Metronome(84, buffer, audioContext);
   });
 }
@@ -82,7 +82,7 @@ function loadPadBuffers() {
         $('#' + id + '_pad_loading_status').text('Loading...');
       });
 
-      loadBuffer('/audio/pads/Key_of_' + encodeURIComponent(key) + '_Pads_5.mp3', function (buffer) {
+      loadBuffer('https://gtbox-setlive.s3.amazonaws.com/Key_of_' + encodeURIComponent(key) + '_Pads_5.mp3', function (buffer) {
         padBuffers[key] = buffer;
         padsToLoad--;
 
