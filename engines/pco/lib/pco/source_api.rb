@@ -69,7 +69,15 @@ module PCO
       all_data = []
 
       while fetch_more
-        response = yield(offset, per_page)
+        response = begin
+          yield(offset, per_page)
+        rescue => err
+          $stderr.puts err
+          break
+        end
+        
+        break unless response
+
         page_data = response['data']
         all_data.concat(page_data)
         fetch_more = page_data.length == per_page

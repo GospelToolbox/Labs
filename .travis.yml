@@ -1,6 +1,11 @@
 language: ruby
+
+rvm:
+  - 2.7
+
 env: 
   - RAILS_ENV=test
+
 before_script:
   - psql -c 'create database gtbox_labs_test;' -U postgres
   - rake db:migrate
@@ -8,6 +13,7 @@ before_script:
 before_install:
   - gem update --system
   - gem install bundler
+  - nvm install 12
   
 install:
   - yarn install

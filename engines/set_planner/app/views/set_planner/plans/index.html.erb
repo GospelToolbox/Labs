@@ -1,1 +1,18 @@
 <h1>Plans</h1>
+
+<%=link_to("New Plan", new_plan_path)%>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+   <% @plans.each do |plan| %>
+    <tr>
+      <td><%=link_to(plan.title, plan_path(plan.id))%></td>
+    </tr>
+    <% end %>  
+  </tbody>
+</table>

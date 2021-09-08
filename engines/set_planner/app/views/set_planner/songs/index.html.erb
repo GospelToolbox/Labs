@@ -2,7 +2,11 @@
 
 <div>
   <button id="btnSyncSongs" class="btn btn-primary">Sync Songs</button>
-    <button id="btnSyncPlanItems" class="btn btn-primary">Sync Plan Items</button>
+  <button id="btnSyncArrangements" class="btn btn-primary">Sync Arrangements</button>
+  <button id="btnSyncKeys" class="btn btn-primary">Sync Keys</button>
+
+  <button id="btnSyncPlans" class="btn btn-primary">Sync Plans</button>
+  <button id="btnSyncPlanItems" class="btn btn-primary">Sync Plan Items</button>
 
 </div>
 
@@ -44,6 +48,42 @@ $(document).ready(function() {
         location.reload();
       });
       $('#btnSyncSongs').attr("disabled", true);
+  });
+
+  $('#btnSyncArrangements').click(function() {
+    $.ajax({
+      method: "GET",
+      url: "<%=PCO::Engine.routes.url_helpers.sync_arrangements_path(1)%>"
+      })
+      .done(function( msg ) {
+        $('#btnSyncArrangements').removeAttr("disabled");
+        location.reload();
+      });
+      $('#btnSyncArrangements').attr("disabled", true);
+  });
+
+  $('#btnSyncKeys').click(function() {
+    $.ajax({
+      method: "GET",
+      url: "<%=PCO::Engine.routes.url_helpers.sync_keys_path(1)%>"
+      })
+      .done(function( msg ) {
+        $('#btnSyncKeys').removeAttr("disabled");
+        location.reload();
+      });
+      $('#btnSyncKeys').attr("disabled", true);
+  });
+
+  $('#btnSyncPlans').click(function() { 
+    $.ajax({
+      method: "GET",
+      url: "<%=PCO::Engine.routes.url_helpers.sync_plans_path(1)%>"
+      })
+      .done(function( msg ) {
+        $('#btnSyncPlans').removeAttr("disabled");
+        location.reload();
+      });
+      $('#btnSyncPlans').attr("disabled", true);
   });
 
   $('#btnSyncPlanItems').click(function() {
