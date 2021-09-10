@@ -50,7 +50,7 @@ module PCO
       api.services.v2.songs[song_id].arrangements[arrangement_id].get()['data']
     end
 
-    def song_arrangement_keys(song_id, arrangment_id)
+    def song_arrangement_keys(song_id, arrangement_id)
       enumerate_paged_response do |offset,per_page|
         api.services.v2.songs[song_id].arrangements[arrangement_id].keys.get(offset: offset, per_page: per_page)
       end
