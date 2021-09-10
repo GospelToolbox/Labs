@@ -82,15 +82,22 @@ function loadPadBuffers() {
         $('#' + id + '_pad_loading_status').text('Loading...');
       });
 
-      loadBuffer('https://gtbox-setlive.s3.amazonaws.com/Key_of_' + encodeURIComponent(key) + '_Pads_5.mp3', function (buffer) {
-        padBuffers[key] = buffer;
-        padsToLoad--;
+      padsToLoad--;
 
-        ids.forEach(function(id) {
-          $('#' + id + '_pad_loading_status').text('');
-          onPadLoaded(id, key);
-        });
+      ids.forEach(function(id) {
+        $('#' + id + '_pad_loading_status').text('');
+        onPadLoaded(id, key);
       });
+
+      // loadBuffer('https://gtbox-setlive.s3.amazonaws.com/Key_of_' + encodeURIComponent(key) + '_Pads_5.mp3', function (buffer) {
+      //   padBuffers[key] = buffer;
+      //   padsToLoad--;
+
+      //   ids.forEach(function(id) {
+      //     $('#' + id + '_pad_loading_status').text('');
+      //     onPadLoaded(id, key);
+      //   });
+      // });
     });
   }
 
@@ -111,13 +118,19 @@ function loadPadBuffers() {
   }
 
   function stopAllPads() {
-    for(var prop in padSources) {
-      if(padSources[prop]) {
-        padGains[prop].gain.setValueAtTime(padGains[prop].gain.value, audioContext.currentTime);
-        padGains[prop].gain.linearRampToValueAtTime(0.001, audioContext.currentTime + 2  );
-        padSources[prop].stop(audioContext.currentTime + 2);
-      }
-    }
+    var padSources = document.querySelectorAll('audio.pads');
+
+    padSources.forEach(function(source) {
+      source.pause();
+    })
+    // for(var source in padSources) {
+    //   source.pause()
+    //   // if(padSources[prop]) {
+    //   //   padGains[prop].gain.setValueAtTime(padGains[prop].gain.value, audioContext.currentTime);
+    //   //   padGains[prop].gain.linearRampToValueAtTime(0.001, audioContext.currentTime + 2  );
+    //   //   padSources[prop].stop(audioContext.currentTime + 2);
+    //   // }
+    // }
   }
   
 
@@ -136,8 +149,10 @@ function loadPadBuffers() {
   }
 
   function playBuffer(buffer, time, pan) {
-    var source = audioContext.createBufferSource(); // creates a sound source
-    source.buffer = buffer; // tell the source which sound to play
+    // var source = audioContext.createBufferSource(); // creates a sound source
+    // source.buffer = buffer; // tell the source which sound to play
+
+    var source = audioContext.createMediaElementSource(buffer)
 
     var panNode = audioContext.createStereoPanner();
     panNode.pan.setValueAtTime(pan, time);
@@ -149,7 +164,8 @@ function loadPadBuffers() {
     gainNode.connect(panNode);
     panNode.connect(audioContext.destination);
 
-    source.start(time);
+    buffer.currentTime = 0;
+    buffer.play();
 
     return [source, gainNode];
   }
@@ -193,7 +209,9 @@ function loadPadBuffers() {
     var song = data.songs[ndx];
 
     stopAllPads();
-    var response = playBuffer(padBuffers[song.key], audioContext.currentTime, 1);
+
+    var audioElement = document.querySelector('audio#audio_' + song.id)
+    var response = playBuffer(audioElement, audioContext.currentTime, 1);
     padSources[song.id] = response[0];
     padGains[song.id] = response[1];
 

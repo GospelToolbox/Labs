@@ -13,6 +13,12 @@
 
 </div>
 
+<audio id="audio_metronome">
+  <source src="https://gtbox-setlive.s3.amazonaws.com/Metronome.wav" type="audio/ogg">
+</audio>
+
+
+
 <table class="table">
   <thead>
     <tr>
@@ -38,6 +44,9 @@
           <button class="btn" id="mute_pad_<%=song.id%>">Toggle Pad</button>
           <!--<button class="btn" id="mute_click_<%=song.id%>">Toggle Click</button>-->
           <button class="btn btn-success" id="play_btn_<%=song.id%>">Play</button>
+          <audio id="audio_<%=song.id%>" class="pads" crossorigin="anonymous">
+            <source src="https://gtbox-setlive.s3.amazonaws.com/Key_of_<%=song.pco_key&.starting_key%>_Pads_5.mp3" type="audio/ogg">
+          </audio>
         </th>
       </tr>
     <% end %>
