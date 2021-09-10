@@ -19,6 +19,7 @@ services:
     command: sleep infinity
     environment:
       app_database_host: db
+      app_database_password: DevDbPassword
       gtbox_account_client_id:
       gtbox_account_secret:
       gtbox_account_host: https://account.gospeltoolbox.org
@@ -39,6 +40,8 @@ services:
       - 5432:5432
     volumes:
       - ../tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: DevDbPassword
 
   redis:
     image: 'redis:4.0-alpine'
