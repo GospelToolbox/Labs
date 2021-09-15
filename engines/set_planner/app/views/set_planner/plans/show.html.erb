@@ -1,16 +1,23 @@
+<div class="container">
+<div class="p-1">
+  <%=link_to '< Back to plans', plans_path %>
+</div>
+
 <h1><%=@plan.title%></h1>
 
-<h2>Description</h2>
-<p><%=@plan.description%></p>
+<dl class="row">
+  <dt class="col-sm-3">Description</dt>
+  <dd class="col-sm-9"><%=@plan.description%></dd>
 
-<h2>Start Date</h2>
-<p><%=@plan.start_date%></p>
+  <dt class="col-sm-3">Start Date</dt>
+  <dd class="col-sm-9"><%=@plan.start_date%></dd>
 
-<h2>Number of Weeks</h2>
-<p><%=@plan.number_of_weeks%></p>
+  <dt class="col-sm-3">Weeks</dt>
+  <dd class="col-sm-9"><%=@plan.number_of_weeks%></dd>
 
-<h2>Songs Needed</h2>
-<p><%=@plan.songs_needed%></p>
+  <dt class="col-sm-3">Songs needed</dt>
+  <dd class="col-sm-9"><%=@plan.songs_needed%></dd>
+</dl>
 
 <div>
 <%=link_to 'Gather', gather_plan_path(@plan) %> |
@@ -34,10 +41,10 @@
       <td><%=link_to(plan_song.pco_song.title, song_path(plan_song.pco_song.id))%><br/>
       <%=plan_song.pco_song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
       <td><%=plan_song.pco_song.last_used_days.to_i%></td>
-      <td><%=number_with_precision(plan_song.pco_song.schedule_score, precision: 2)%></td>
+      <td><%=number_with_precision((plan_song.pco_song.normalized.score || 0) * 100, precision: 1)%></td>
     </tr>
             <% end %>
             
           </tbody>
         </table>
- 
+ </div>

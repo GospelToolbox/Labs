@@ -1,3 +1,8 @@
+<div class="container">
+<div class="p-1">
+  <%=link_to '< Back to plans', plans_path %>
+</div>
+
 <h1><%=@plan.title%> (GATHER)</h1>
 
 <div>
@@ -7,44 +12,47 @@
 <%=link_to 'Publish', publish_plan_path(@plan) %>
 </div>
 
-<h2>Songs Needed</h2>
-<p><%=@plan.songs_needed%></p>
+<div class="p-1">
+  <p>
+  In the gather phase, the goal is to identify all songs that would be helpful
+  in worship for this plan. Going over the required number of songs is okay and
+  encouraged.
+  </p>
 
-<h2>Songs</h2>
-  <table>
-    <tr>
-    <td><h3>Available Songs</h3></td>
-      <td><h3>Selected Songs (<%=@plan.pco_plan_songs.count%>) </h3></td>
-      
-    </tr>
-    <tr>
-      
-      <td>
-        
-<table class="table">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Name</th>
-      <th>Last Used</th>
-      <th>Schedule Score</th>
-    </tr>
-  </thead>
-  <tbody>
-   <% @songs.each do |song| %>
-    <tr>
-      <td><%=link_to('select', select_song_plan_path(@plan.id, song_id: song.id))%></td>
-      <td><%=link_to(song.title, song_path(song.id))%><br/>
-      <%=song.song.pco_tags.map { |tag| tag.value}.join(', ')%>
-      </td>
-      <td><%=song.since_last_use.to_i%></td>
-      <td><%=number_with_precision(song.score, precision: 2)%></td>
-    </tr>
-    <% end %>  
-  </tbody>
-</table>
-</td>
-<td style="vertical-align:top">
+  <p>
+  When you're finished select an initial set of songs, move on to the "Refine" phase.
+  </p>
+</div>
+
+<div class="row">
+    <div class="col-sm">
+      <h3>Available Songs</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Last Used</th>
+            <th>Schedule Score</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @songs.each do |song| %>
+          <tr>
+            <td><%=link_to('Select', select_song_plan_path(@plan.id, song_id: song.id))%></td>
+            <td><%=link_to(song.title, song_path(song.id))%><br/>
+            <%=song.song.pco_tags.map { |tag| tag.value}.join(', ')%>
+            </td>
+            <td><%=song.since_last_use.to_i%></td>
+            <td><strong><%=number_with_precision((song.score || 0) * 100, precision: 1)%></strong></td>
+          </tr>
+          <% end %>  
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-sm">
+      <h3>Selected Songs (<%=@plan.pco_plan_songs.count%> of <%=@plan.songs_needed%>) </h3>
         <table class="table">
           <thead>
             <tr>
@@ -56,18 +64,19 @@
           </thead>
           <tbody>
             <% @plan.pco_plan_songs.each do |plan_song| %>
-<tr>
-      <td><%=link_to 'Destroy', plan_plan_song_path(@plan, plan_song),
-            data: {:confirm => 'Are you sure?'}, :method => :delete%></td>
-      <td><%=link_to(plan_song.pco_song.title, song_path(plan_song.pco_song.id))%><br/>
-      <%=plan_song.pco_song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
-      <td><%=plan_song.pco_song.last_used_days.to_i%></td>
-      <td><%=number_with_precision(plan_song.pco_song.schedule_score, precision: 2)%></td>
-    </tr>
+            <tr>
+              <td>
+                <%=link_to 'Remove', plan_plan_song_path(@plan, plan_song),
+                data: {:confirm => 'Are you sure?'}, :method => :delete%>
+              </td>
+              <td><%=link_to(plan_song.pco_song.title, song_path(plan_song.pco_song.id))%><br/>
+              <%=plan_song.pco_song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
+              <td><%=plan_song.pco_song.last_used_days.to_i%></td>
+              <td><%=number_with_precision((plan_song.pco_song.normalized.score || 0) * 100, precision: 1)%></td>
+            </tr>
             <% end %>
-            
+              
           </tbody>
         </table>
-      </td>
-</tr>
-</table>
+    </div>
+</div>
