@@ -26,7 +26,7 @@ module SetPlanner
 
       @songs = PCO::SongNormalized.where(hidden: false)
                .where.not(id: @plan.pco_plan_songs.map { |ps| ps.pco_song_id }) 
-               .order(score: :desc)
+               .order('score DESC NULLS LAST')
     end
 
     def refine
@@ -48,7 +48,7 @@ module SetPlanner
       @plan_song = SetPlanner::PlanSong.new(set_planner_plan: @plan, pco_song: @song)
       @plan_song.save
 
-      redirect_to @plan
+      redirect_to gather_plan_path(@plan)
     end
 
     def update

@@ -1,3 +1,9 @@
+<div class="container">
+
+<div class="p-1">
+  <%=link_to '< Back to plans', plans_path %>
+</div>
+
 <h1><%=@plan.title%> (REFINE) </h1>
 
 <div>
@@ -7,11 +13,7 @@
   <%=link_to 'Publish', publish_plan_path(@plan) %>
 </div>
 
-
-<h2>Songs Needed</h2>
-<p><%=@plan.songs_needed%></p>
-
-<h2>Songs (<%=@plan.pco_plan_songs.count%>)</h2>
+<h2>Songs (<%=@plan.pco_plan_songs.count%> of <%=@plan.songs_needed%>)</h2>
 <table class="table">
   <thead>
     <tr>
@@ -24,12 +26,12 @@
   <tbody>
     <% @plan.pco_plan_songs.each do |plan_song| %>
     <tr>
-      <td><%=link_to 'Destroy', plan_plan_song_path(@plan, plan_song),
+      <td><%=link_to 'Remove', plan_plan_song_path(@plan, plan_song),
             data: {:confirm => 'Are you sure?'}, :method => :delete%></td>
       <td><%=link_to(plan_song.pco_song.title, song_path(plan_song.pco_song.id))%><br />
         <%=plan_song.pco_song.pco_tags.map { |tag| tag.value}.join(', ')%></td>
       <td><%=plan_song.pco_song.last_used_days.to_i%></td>
-      <td><%=number_with_precision(plan_song.pco_song.schedule_score, precision: 2)%></td>
+      <td><%=number_with_precision((plan_song.pco_song.normalized.score || 0) * 100, precision: 1)%></td>
     </tr>
     <% end %>
 
@@ -43,3 +45,4 @@
   <% end %>
 ]
 </pre>
+</div>

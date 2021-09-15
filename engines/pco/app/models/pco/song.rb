@@ -42,5 +42,9 @@ module PCO
       frequency * last_used_days
     end
 
+    def normalized
+      PCO::SongNormalized.find_by(id: id)
+    end
+
   end
 end

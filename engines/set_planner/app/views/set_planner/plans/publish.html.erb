@@ -1,9 +1,10 @@
 <div class="container">
+
 <div class="p-1">
   <%=link_to '< Back to plans', plans_path %>
 </div>
 
-<h1><%=@plan.title%> (ENRICH) </h1>
+<h1><%=@plan.title%> (PUBLISH) </h1>
 
 <div>
 <%=link_to 'Gather', gather_plan_path(@plan) %> |
@@ -13,4 +14,5 @@
 </div>
 
 Coming soon...
+
 </div>
