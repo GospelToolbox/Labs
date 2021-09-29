@@ -2,9 +2,9 @@
   "name": "@gospeltoolbox/labs",
   "private": true,
   "dependencies": {
+    "@babel/preset-react": "^7.14.5",
     "@rails/webpacker": "^5.4.2",
     "axios": "^0.21.4",
-    "@babel/preset-react": "^7.14.5",
     "bootstrap": "^4.5.3",
     "graphql.js": "^0.4.20",
     "jquery": "^3.5.1",
